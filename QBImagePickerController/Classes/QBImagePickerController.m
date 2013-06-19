@@ -134,7 +134,8 @@
             
             self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
             self.navigationController.navigationBar.translucent = YES;
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+            if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
             
             CGFloat top = 0;
             if (![[UIApplication sharedApplication] isStatusBarHidden]) top = top + 20;
@@ -166,7 +167,8 @@
         // Restore bar styles
         self.navigationController.navigationBar.barStyle = self.previousBarStyle;
         self.navigationController.navigationBar.translucent = self.previousBarTranslucent;
-        [[UIApplication sharedApplication] setStatusBarStyle:self.previousStatusBarStyle animated:YES];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
+            [[UIApplication sharedApplication] setStatusBarStyle:self.previousStatusBarStyle animated:YES];
     }
 }
 
