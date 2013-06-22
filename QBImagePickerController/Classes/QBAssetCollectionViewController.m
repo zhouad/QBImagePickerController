@@ -73,18 +73,21 @@
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
         
         CGFloat top = 0;
-        if (![[UIApplication sharedApplication] isStatusBarHidden]) top = top + 20;
-        if (!self.navigationController.navigationBarHidden) top = top + 44;
+        if (([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)) {
+            if (![[UIApplication sharedApplication] isStatusBarHidden]) top = top + 20;
+            if (!self.navigationController.navigationBarHidden) top = top + 44;
+        }
         self.tableView.contentInset = UIEdgeInsetsMake(top, 0, 0, 0);
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(top, 0, 0, 0);
         
         [self setWantsFullScreenLayout:YES];
     }
-    
+#if 0
     // Scroll to bottom
     NSInteger numberOfRows = [self.tableView numberOfRowsInSection:2];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(numberOfRows - 1) inSection:2];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
