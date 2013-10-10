@@ -67,7 +67,6 @@
     
     if (self.fullScreenLayoutEnabled) {
         // Set bar styles
-        self.navigationController.navigationBar.translucent = YES;
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
         

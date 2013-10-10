@@ -69,6 +69,8 @@
         
         [self.view addSubview:tableView];
         self.tableView = tableView;
+        if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)])
+            [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     
     return self;
@@ -77,7 +79,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+
     void (^assetsGroupsEnumerationBlock)(ALAssetsGroup *, BOOL *) = ^(ALAssetsGroup *assetsGroup, BOOL *stop) {
         if (assetsGroup) {
             switch(self.filterType) {
@@ -132,14 +136,12 @@
             self.previousBarTranslucent = self.navigationController.navigationBar.translucent;
             self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
             
-            self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-            self.navigationController.navigationBar.translucent = YES;
             if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
                 [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
             
             CGFloat top = 0;
             if (![[UIApplication sharedApplication] isStatusBarHidden]) top = top + 20;
-            if (!self.navigationController.navigationBarHidden) top = top + 44;
+            //if (!self.navigationController.navigationBarHidden) top = top + 44;
             self.tableView.contentInset = UIEdgeInsetsMake(top, 0, 0, 0);
             self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(top, 0, 0, 0);
             

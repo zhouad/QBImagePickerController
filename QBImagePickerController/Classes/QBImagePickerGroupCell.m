@@ -53,7 +53,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1)
+        self.imageView.frame = CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height);
     CGFloat height = self.contentView.bounds.size.height;
     CGFloat imageViewSize = height - 1;
     CGFloat width = self.contentView.bounds.size.width - 20;
